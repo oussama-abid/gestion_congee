@@ -17,6 +17,10 @@ class CreateAdminsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nomadmin');
             $table->string('prenomadmin');
+            $table->string('poste');
+            $table->string('tel');
+            $table->integer('nbjours_tot')->default('30');
+            $table->integer('nbjours_rest')->default('30');
             $table->string('emailadmin');
             $table->string('passadmin');
             $table->string('role')->default('admin');
