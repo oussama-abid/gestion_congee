@@ -17,7 +17,11 @@ class CreateEmployesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nomemploye');
             $table->string('prenomemploye');
+            $table->string('poste');
             $table->string('emailemploye');
+            $table->string('tel');
+            $table->integer('nbjours_tot')->default('30');
+            $table->integer('nbjours_rest')->default('30');
             $table->string('passemploye');
             $table->string('role')->default('employe');
             $table->timestamps();

@@ -60,6 +60,23 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <select  name="role" value="{{$user->role ?? old('role') }}"  class="form-control @error('role') is-invalid @enderror" id="floatingSelect"   aria-label="Floating label select example"  name="role"  id="role">
+                                    <option value="employe">employe</option>
+                                    
+                                    <option value="pdg">pdg</option>
+                                   
+                                </select>
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
