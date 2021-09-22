@@ -6,36 +6,35 @@
     <div class="container-fluid">
         <div class="row">
             <br>
-            <h2>employes:</h2>
-            <table   class="table table-hover" style="color: black">
+            <h2>employes :</h2>
+            <table   class="table table-hover" style="color: black" >
                 <thead style="color: black" class="thead-dark">
-                 <tr >
+                 <tr style="text-align: center">
                     <th>ID</th>
-                    <th>Nom </th>
-                    <th>Prenom </th>
-                    <th>Poste</th>
+                    <th>name </th>
+                    <th>role </th>
                     <th>email</th>
-                    <th>tel</th>
                     <th>nb jours total</th>
-                    <th>nb jours rest</th>
+                    <th>nb jours restant</th>
+
+                   
                     
                    
                 </tr>
             </thead>
-            <tbody >
-                @foreach ($employe as $employ)
+            <tbody style="text-align: center">
+                @foreach ($users as $user)
                 
                 <tr >
                        
-                    <td >{{ $employ->id }}</td>
+                    <td >{{ $user->id }}</td>
                         
-                    <td>{{ $employ->nomemploye   }}</td>
-                    <td>{{ $employ->prenomemploye }}</td>
-                    <td>{{ $employ->poste }}</td>
-                    <td>{{ $employ->emailemploye }}</td>
-                    <td>{{ $employ->tel }}</td>
-                    <td>{{ $employ->nbjours_tot   }}</td>
-                    <td>{{ $employ->nbjours_rest  }}</td>
+                    <td>{{ $user->name   }}</td>
+                    <td>{{ $user->role }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->nbjours_tot }}</td>
+                    <td>{{ $user->nbjours_rest }}</td>
+                  
                     
                    
                               </tr>
@@ -45,9 +44,8 @@
             </tbody>
             
             </table>
-            <div class="mx-auto"  style="width: 200px;">
-                {{ $employe->links() }}
         </div>
+
     </div>
 @endsection
  
