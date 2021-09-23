@@ -2,37 +2,58 @@
 @section('main')
 <div class="content-body">
     <!-- row -->
+    
+    
     <div class="container-fluid">
         <div class="row">
-                <br>
-                <h2>demandes you have:</h2>
+            <a  class="btn btn-secondary btn-lg"  href="{{ route('mesdemandes.create') }}" role="button" > <i
+                class="ti-arrow-right"></i> Faire une demande de congé </a>
+
+        </div>
+        
+        <br>
+        
+        <div class="row">
+            
+                <h2>vos demandes  :</h2>
+
                 <table   class="table table-hover" style="color: black">
+                    
                     <thead style="color: black" class="thead-dark">
                      <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Date debut </th>
                         <th>Date fin </th>
                         <th>nb jours</th>
                         <th>raison</th>
-                        <th>user id</th>
+                        <th>Actions</th>
                         <th>etat</th>
                         
                        
                     </tr>
                 </thead>
                 <tbody >
-                    @foreach ($demande as $demand)
+
+                    @foreach ($demande as $demande)
                     
                     <tr >
+                        
                            
-                        <td >{{ $demand->id }}</td>
+                        <td >{{ $demande->id }}</td>
                             
-                        <td>{{ $demand->date_debut }}</td>
-                        <td>{{ $demand->date_fin }}</td>
-                        <td>{{ $demand->nb_jours }}</td>
-                        <td>{{ $demand->Raison }}</td>
-                        <td>{{ $demand->user_id }}</td>
-                        <td>{{ $demand->etat }}</td>
+                        <td>{{ $demande->date_debut }}</td>
+                        <td>{{ $demande->date_fin }}</td>
+                        <td>{{ $demande->nb_jours }}</td>
+                        <td>{{ $demande->Raison }}</td>
+                        <td> 
+                           <a href="{{ route('demandes.show', ['demande' => $demande->id]) }}" class="btn btn-warning"> show </a>
+                           <a href="{{ route('demandes.edit', ['demande' => $demande->id]) }}"class="btn btn-success">edit </a>
+
+
+                            
+                            
+                        </td>
+                        <td>{{ $demande->etat }}</td>
                         
                        
                                   </tr>
@@ -42,9 +63,7 @@
                 </tbody>
                 
                 </table>
-                <div class="mx-auto"  style="width: 200px;">
-                    {{ $demande->links() }}
-                </div>
+               
                 
         </div>
 @endsection

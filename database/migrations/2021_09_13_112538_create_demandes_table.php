@@ -19,7 +19,7 @@ class CreateDemandesTable extends Migration
             $table->date('date_fin');
             $table->integer('nb_jours');
             $table->string('Raison');
-            $table->string('etat');
+            $table->enum('etat',['enattente','accepterparadmin','accepterparpdg','annule','refuse']);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('restrict');
 

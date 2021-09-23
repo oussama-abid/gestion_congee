@@ -84,18 +84,29 @@
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
+
                                     <a href="./app-profile.html" class="dropdown-item">
+                                        
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Profile </span>
                                     </a>
+
+                                    <a  class="dropdown-item"   href="{{ route('logout') }}" 
+                                    
+                                    onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();" > <i class="icon-key"></i>
+                                     {{ __('Logout') }}
+                                     
+                                 </a>
+
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                     @csrf
+                                 </form>
                               
-                                    <a href="./page-login.html" class="dropdown-item">
-                                        <i class="icon-key"></i>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
+                                   
                                 </div>
                             </li>
                         </ul>
