@@ -11,7 +11,7 @@ class EmployesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Employe::class, 3)->create();
+        factory(Employe::class, 6)->create();
 
     }
 }

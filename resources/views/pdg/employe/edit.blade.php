@@ -7,7 +7,7 @@
     <h2 >Edit employe : <strong>{{ $user->id }}</strong></h2>
        
   
-    <form action="{{route('employes.update' ,['user' => $user->id]) }} " method="post">
+    <form action="{{ route ('user.update',['user' => $user->id])  }} " method="post">
         @method('PUT')
         @include('layouts.empform')
     </form>

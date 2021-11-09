@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->enum('role',['employe','pdg','admin']);
             $table->integer('nbjours_tot')->default('30');
             $table->integer('nbjours_rest')->default('30');
+            $table->enum('statut',['disponible','en_conge'])->default('disponible');
+
             $table->rememberToken();
             $table->timestamps();
         });

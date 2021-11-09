@@ -11,7 +11,14 @@
     <!--*******************
         Preloader end
     ********************-->
-
+    <div style="display: none">
+        {{ $notification=DB::table('notifications')->where('isadmin',1)
+        ->where('titre','un Admin')
+        ->orderBy('id', 'desc')
+        ->paginate(4)
+         }}
+    
+    </div>
 
     <!--**********************************
         Main wrapper start
@@ -22,10 +29,9 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="./images/logo.png" alt="">
-                <img class="logo-compact" src="./images/logo-text.png" alt="">
-                <img class="brand-title" src="./images/logo-text.png" alt="">
+            <a href="" class="brand-logo">
+                <img class="logo-compact"  alt="" src="{{ asset('/images/logo-text.png') }}">
+                <img  src="{{ asset('/images/logo-text.png') }}"  style="width: 80% "alt="">
             </a>
 
             <div class="nav-control">
@@ -57,28 +63,24 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <ul class="list-unstyled">
+                                        @foreach ($notification  as $noti)
+                                        
+                     
                                         <li class="media dropdown-item">
                                             <span class="success"><i class="ti-user"></i></span>
                                             <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
+                                                <a href="/demandes">
+                                                    <p><strong>{{ $noti->titre }}</strong> {{ $noti->content }}
+
                                                     </p>
                                                 </a>
                                             </div>
-                                            <span class="notify-time">3:20 am</span>
+                                            <span class="notify-time"> {{ $noti->created_at }} </span>
                                         </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
+                                         @endforeach  
                                   
                                     </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
+                                    <a class="all-notification" href="/demandes">See all notifications <i
                                             class="ti-arrow-right"></i></a>
                                 </div>
                             </li>
@@ -88,7 +90,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
 
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="{{ route('user.index', ['user' => Auth::user()->id]) }}" class="dropdown-item">
                                         
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Profile </span>
@@ -121,15 +123,17 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Main Menu</li>
-                    <li><a  href="/pdg-dashboard">dashboard</a></li>
-                    <li><a href="/admins">admins</a></li>
-                    <li><a href="/employes">employes</a></li>
-                    <li><a href="/demandes">demandes de congés</a></li>
+                    <li><a  href="/pdg-dashboard"><i class="ti-bar-chart-alt"> </i>dashboard</a></li>
+                    <li><a href="/admins"><i class="ti-id-badge"> </i>admins</a></li>
+                    <li><a href="/employes"><i class="ti-id-badge"> </i>employes</a></li>
+                    <li><a href="/demandes"><i class="ti-briefcase"> </i>demandes de congés</a></li>
 
                     
                     
                 </ul>
             </div>
+        </div>
+    </div>
         <!--**********************************
             Sidebar start
         ***********************************-->

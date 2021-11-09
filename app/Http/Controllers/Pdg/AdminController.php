@@ -9,10 +9,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use App\Mail\Password;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Mail\Mailable;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
 class AdminController extends Controller
 {
     /**
@@ -51,15 +55,40 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'role' => $request['role'],
+    
+        request()->validate([
 
-        ]);
+            'email' => 'unique:users,email',
+         
+            
+    ],
+    [
+        'email.unique' => 'email utilisé choisir un autre ',
+        
+     
+       
 
-        return redirect()->route('admins.index'  );
+
+
+
+
+
+    ]);
+        $user= new user;
+        $user ->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->role = 'admin';
+
+$user->save();
+
+$data=$request['password'];
+Mail::to($user->email)->send(new Password($data));
+
+return redirect()->route('admins.index' ,$user )->with('ajout',"l'admin est ajouté ");;
+
+
+        
     }
 
     /**

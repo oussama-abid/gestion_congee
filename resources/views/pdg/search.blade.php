@@ -1,8 +1,7 @@
 @extends('layouts.pdg')
+@section('main')
 <meta name="_token" content="{{ csrf_token() }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-@section('main')
-
 <div class="content-body">
   
     <!-- row -->
@@ -79,7 +78,8 @@
                    <th>name </th>
                    <th>role </th>
                    <th>email</th>
-                   
+                   <th>nb jours total</th>
+                   <th>nb jours restant</th>
                    <th>Actions</th>
 
 
@@ -92,7 +92,25 @@
            </tbody>
            
            </table>
-               <script type="text/javascript">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <script type="text/javascript">
             $('#search').on('keyup',function(){
             $value=$(this).val();
             $.ajax({

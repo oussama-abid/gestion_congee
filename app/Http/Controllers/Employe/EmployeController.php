@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
-
+use App\Mail\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -71,15 +72,26 @@ class EmployeController extends Controller
      */
     public function store(Request $request)
     {
-       
+        request()->validate([
 
-          User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-        ]);
+            'email' => 'unique:users,email',
+         
+            
+    ],
+    [
+        'email.unique' => 'email utilisé choisir un autre ',
 
-        return redirect()->route('employes.index'  );
+    ]);
+        $user= new user;
+        $user ->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->role = 'employe';
+
+$user->save();
+$data=$request['password'];
+Mail::to($user->email)->send(new Password($data));
+        return redirect()->route('employes.index'  )->with('ajout',"l'employe est ajouté ");
     
     }
 
@@ -102,8 +114,7 @@ class EmployeController extends Controller
      */
     public function edit(Employe $employe)
     {
-        return view('employe.mesdemandes.edit');
-
+        return view('pdg.employe.edit', ['employe' => $user]);
     }
 
     /**
@@ -113,13 +124,21 @@ class EmployeController extends Controller
      * @param  \App\Employe  $employe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employe $employe)
+    public function update(Request $request, User $user)
     {
+        DB::table('users')
+        ->where('id',$user->id)
+        ->update([
         
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
 
 
+        ]);
       
 
+        return redirect()->route('employes.show', $user)->with('updateuser', "demande has been updated successfuly");
     }
 
     /**
