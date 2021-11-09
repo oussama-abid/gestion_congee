@@ -46,7 +46,7 @@ class LoginController extends Controller
                  
 
             default:
-               return '/home';
+               return '/home'->with('eror','eror');
                  break;
          }
     }

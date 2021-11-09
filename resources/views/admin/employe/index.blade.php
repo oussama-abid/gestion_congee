@@ -16,6 +16,7 @@
                     <th>email</th>
                     <th>nb jours total</th>
                     <th>nb jours restant</th>
+                    <th>Actions</th>
 
                    
                     
@@ -34,7 +35,10 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->nbjours_tot }}</td>
                     <td>{{ $user->nbjours_rest }}</td>
-                  
+                    <td> 
+                        <a href="{{ route ('user.show',['user' => $user->id])}}" class="btn btn-warning"> show </a>
+                        
+                     </td>
                     
                    
                               </tr>

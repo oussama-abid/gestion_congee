@@ -19,7 +19,7 @@ class CheckIfPdg
         $role = Auth::user()->role;
         switch ($role) {
             case 'admin':
-                return '/admin-dashboard';
+                return redirect ('/admin-dashboard');
                 break;
             case 'employe':
                 return redirect('/employe-dashboard');

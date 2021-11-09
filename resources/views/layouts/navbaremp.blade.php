@@ -1,6 +1,7 @@
     <!--*******************
         Preloader start
     ********************-->
+    
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
@@ -11,7 +12,26 @@
     <!--*******************
         Preloader end
     ********************-->
+    <div style="display: none">
+        {{ $notification=DB::table('notifications')->where('isadmin',1)
+        ->where('user_id',Auth::user()->id)
+        ->where('titre','not like', '%Mr/Mme%')
+        ->orderBy('id', 'desc')
+        ->paginate(4)
+         }}
+    
+    </div>
 
+    <div style="display: none">
+        {{ $notification1=DB::table('notifications')->where('isadmin',1)
+        ->where('user_id',Auth::user()->id)
+        ->where('titre','like','%Mr/Mme%')
+        ->orderBy('id', 'desc')
+        ->paginate(4)
+         }}
+    
+    </div>
+    
 
     <!--**********************************
         Main wrapper start
@@ -22,10 +42,9 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="./images/logo.png" alt="">
-                <img class="logo-compact" src="./images/logo-text.png" alt="">
-                <img class="brand-title" src="./images/logo-text.png" alt="">
+            <a href="" class="brand-logo">
+                <img class="logo-compact"  alt="" src="{{ asset('/images/logo-text.png') }}">
+                <img  src="{{ asset('/images/logo-text.png') }}"  style="width: 80% "alt="">
             </a>
 
             <div class="nav-control">
@@ -57,39 +76,68 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <ul class="list-unstyled">
+                                        @foreach ($notification  as $noti)
+                                        
+                     
                                         <li class="media dropdown-item">
                                             <span class="success"><i class="ti-user"></i></span>
                                             <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
+                                                <a href="/mesdemandes">
+                                                    <p><strong>{{ $noti->titre }}</strong> {{ $noti->content }}
+
                                                     </p>
                                                 </a>
                                             </div>
-                                            <span class="notify-time">3:20 am</span>
+                                            <span class="notify-time"> {{ $noti->created_at }} </span>
                                         </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
+                                         @endforeach           
                                   
                                     </ul>
-                                    <a class="all-notification" href="#">See all notifications <i
+                                    <a class="all-notification" href="/mesdemandes">See all notifications <i
                                             class="ti-arrow-right"></i></a>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-message-text"></i>
+                                    <div class="pulse-css"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="list-unstyled">
+                                        @foreach ($notification1  as $noti)
+                                        
+                     
+                                        <li class="media dropdown-item">
+                                            <span class="success"><i class="ti-user"></i></span>
+                                            <div class="media-body">
+                                                <a href="" data-toggle="modal" data-target="#exampleModal" onclick="showAlert();">
+                                                    <p><strong>{{ $noti->titre }}</strong> {{ $noti->content }}
+
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time"> {{ $noti->created_at }} </span>
+                                        </li>
+
+                       
+
+
+                                        
+                                         @endforeach           
+                                  
+                                    </ul>
+                          
+                                </div>
+                            </li>
+
 
                            <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    
+                                    <a href="{{ route('user.index', ['user' => Auth::user()->id]) }}" class="dropdown-item">
                                         
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Profile </span>
@@ -121,17 +169,30 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">Main Menu</li>
-                    <li><a  href="/employe-dashboard">dashboard</a></li>
+                    <li class="nav-label first"> Main Menu</li>
+                    
+                    <li><a  href="/employe-dashboard"><i class="ti-bar-chart-alt"> </i>  dashboard</a></li>
 
-                    <li><a href="/mesdemandes">mes demandes de congés</a></li>
-                    <li><a href="/reportemp">reporter un probleme</a></li>
-                    <li><a href="/demandes"></a></li>
+                    <li><a href="/mesdemandes"> <i class="ti-briefcase"> </i> demandes de congés</a></li>
                     
                     
                 </ul>
+
+
+              
             </div>
+        </div>
         <!--**********************************
             Sidebar start
         ***********************************-->
+        
+        
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="container">
        
+                
+                           </div>
+            </div>

@@ -55,6 +55,7 @@
 
         <div class="col-md-6">
             <select  name="role" value="{{$user->role ?? old('role') }}"  class="form-control @error('role') is-invalid @enderror" id="floatingSelect"   aria-label="Floating label select example"  name="role"  id="role">
+
                 <option value="admin">admin</option>
                 
                
